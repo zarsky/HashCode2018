@@ -16,7 +16,7 @@ public class Main {
                 writer.write(line);
             reader.close();
             writer.close();
-            System.out.println("Done");
+            System.out.println("Done!");
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
