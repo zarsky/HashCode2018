@@ -43,26 +43,15 @@ public class Car {
     void takeRide(Ride ride) {
         currentX = ride.endX;
         currentY = ride.endY;
-        currentStep = Math.max(getDistanceToRide(ride), ride.startStep) + ride.distance;
+        currentStep = getLastStepForRide(ride);
         rideNumbers.add(ride.number);
     }
 
     long getLastStepForRide(Ride ride) {
-        Car cloneCar = this.clone();
-        cloneCar.takeRide(ride);
-        return cloneCar.currentStep;
+        return Math.max(currentStep + getDistanceToRide(ride), ride.startStep) + ride.distance;
     }
 
     long getDistanceToRide(Ride ride) {
         return Math.abs(currentX - ride.startX) + Math.abs(currentY - ride.startY);
-    }
-
-    @Override
-    protected Car clone() {
-        Car newCar = new Car(availableRides);
-        newCar.currentX = currentX;
-        newCar.currentY = currentY;
-        newCar.currentStep = currentStep;
-        return newCar;
     }
 }

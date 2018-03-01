@@ -12,7 +12,7 @@ public class Main {
 
         String line;
 
-        for (int fileNum = 0; fileNum < files.length; fileNum++) {
+        for (int fileNum = 0; fileNum < Math.min(9, files.length); fileNum++) {
 
             try {
 
@@ -44,6 +44,8 @@ public class Main {
                 //while (rides.size() > 0) {}
 
                 for (int i = 0; i < fleet.size(); i++) {
+                    if (i % 10 == 0)
+                        System.out.println("Car " + i);
                     fleet.get(i).takeRidesWhileCan();
                 }
 
