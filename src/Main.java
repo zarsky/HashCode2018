@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,9 +41,11 @@ public class Main {
                 }
 
                 // TODO solution goes here
-                for (int i = 0; i < fleet.size(); i++) {
-                    if (rides.size() > 0)
-                        fleet.get(i).takeTheBestRide();
+                while (rides.size() > 0) {
+                    for (int i = 0; i < fleet.size(); i++) {
+                        if (rides.size() > 0)
+                            fleet.get(i).takeTheBestRide();
+                    }
                 }
 
                 // Output
@@ -67,7 +66,7 @@ public class Main {
 
                 System.out.println(fileNum + " - done!");
 
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.err.println(fileNum + " - error: " + e.getMessage());
             }
         }

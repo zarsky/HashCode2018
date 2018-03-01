@@ -16,7 +16,20 @@ public class Car {
     }
 
     void takeTheBestRide() {
-        takeRide(availableRides.get(0));
+        long minStep = Long.MAX_VALUE;
+        int pos = -1;
+        for (int i = 0; i < availableRides.size(); i++) {
+            Ride currentRide = availableRides.get(i);
+            long currentLastStep = getLastStepForRide(currentRide);
+            if (currentLastStep <= currentRide.finishStep && currentLastStep < minStep) {
+                minStep = currentLastStep;
+                pos = i;
+            }
+        }
+        if (pos >= 0) {
+            takeRide(availableRides.get(pos));
+            availableRides.remove(pos);
+        }
     }
 
     void takeRide(Ride ride) {
@@ -24,7 +37,6 @@ public class Car {
         currentY = ride.endY;
         currentStep = Math.max(getDistanceToRide(ride), ride.startStep) + ride.distance;
         rideNumbers.add(ride.number);
-        availableRides.remove(ride);
     }
 
     long getLastStepForRide(Ride ride) {
