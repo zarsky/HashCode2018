@@ -41,11 +41,10 @@ public class Main {
                 }
 
                 // TODO solution goes here
-                while (rides.size() > 0) {
-                    for (int i = 0; i < fleet.size(); i++) {
-                        if (rides.size() > 0)
-                            fleet.get(i).takeTheBestRide();
-                    }
+                //while (rides.size() > 0) {}
+
+                for (int i = 0; i < fleet.size(); i++) {
+                    fleet.get(i).takeRidesWhileCan();
                 }
 
                 // Output

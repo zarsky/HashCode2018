@@ -8,6 +8,8 @@ public class Car {
             currentY = 0,
             currentStep = 0;
 
+    int pos = -1;
+
     List<Ride> availableRides;
     List<Long> rideNumbers = new ArrayList<>();
 
@@ -17,7 +19,7 @@ public class Car {
 
     void takeTheBestRide() {
         long minStep = Long.MAX_VALUE;
-        int pos = -1;
+        pos = -1;
         for (int i = 0; i < availableRides.size(); i++) {
             Ride currentRide = availableRides.get(i);
             long currentLastStep = getLastStepForRide(currentRide);
@@ -26,10 +28,16 @@ public class Car {
                 pos = i;
             }
         }
-        if (pos >= 0) {
+        if (pos > -1) {
             takeRide(availableRides.get(pos));
             availableRides.remove(pos);
         }
+    }
+
+    void takeRidesWhileCan() {
+        do {
+            takeTheBestRide();
+        } while (pos > -1);
     }
 
     void takeRide(Ride ride) {
