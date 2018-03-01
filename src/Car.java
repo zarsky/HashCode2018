@@ -5,9 +5,28 @@ public class Car {
             currentY = 0,
             currentStep = 0;
 
-    void take(Ride ride) {
+    void takeRide(Ride ride) {
         currentX = ride.endX;
         currentY = ride.endY;
-        currentStep = // TODO
+        currentStep = Math.max(getDistanceToRide(ride), ride.startStep) + ride.distance;
+    }
+
+    long getLastStepForRide(Ride ride) {
+        Car cloneCar = this.clone();
+        cloneCar.takeRide(ride);
+        return cloneCar.currentStep;
+    }
+
+    long getDistanceToRide(Ride ride) {
+        return Math.abs(currentX - ride.startX) + Math.abs(currentY - ride.startY);
+    }
+
+    @Override
+    protected Car clone() {
+        Car newCar = new Car();
+        newCar.currentX = currentX;
+        newCar.currentY = currentY;
+        newCar.currentStep = currentStep;
+        return newCar;
     }
 }

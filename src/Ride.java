@@ -5,17 +5,17 @@ public class Ride {
             startY,
             endX,
             endY,
-            start,
-            finish,
+            startStep,
+            finishStep,
             distance;
 
-    Ride(int startX, int startY, int endX, int endY, int start, int finish) {
+    Ride(int startX, int startY, int endX, int endY, int startStep, int finishStep) {
         this.startX = startX;
         this.startY = startY;
         this.endX = endX;
         this.endY = endY;
-        this.start = start;
-        this.finish = finish;
+        this.startStep = startStep;
+        this.finishStep = finishStep;
         distance = Math.abs(this.startX - this.endX) + Math.abs(this.startY - this.endY);
     }
 }
