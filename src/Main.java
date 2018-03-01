@@ -41,6 +41,10 @@ public class Main {
                     rides.add(new Ride(splitStringToNumbers(reader.readLine())));
                 }
 
+                for (int i = 0; i < n; i++) {
+                    writer.write(rides.get(i).distance + "\n");
+                }
+
                 reader.close();
                 writer.close();
 

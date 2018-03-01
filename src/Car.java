@@ -1,9 +1,15 @@
+import java.util.List;
+
 public class Car {
 
     long
             currentX = 0,
             currentY = 0,
             currentStep = 0;
+
+    void takeTheBestRide(List<Ride> rides) {
+        takeRide(rides.get(0)); // TODO Logic here
+    }
 
     void takeRide(Ride ride) {
         currentX = ride.endX;
