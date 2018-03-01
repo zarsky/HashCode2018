@@ -7,18 +7,23 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String[] files = {"big", "example", "medium", "small"};
+
         String line;
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("input/example.in"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("output/example.out"));
-            while ((line = reader.readLine()) != null)
-                writer.write(line);
-            reader.close();
-            writer.close();
-            System.out.println("Done!");
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+        for (int i = 0; i < files.length; i++) {
+
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("input/" + files[i] + ".in"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("output/" + files[i] + ".out"));
+                while ((line = reader.readLine()) != null)
+                    writer.write(line);
+                reader.close();
+                writer.close();
+                System.out.println(i + " - done!");
+            } catch (Exception e) {
+                System.err.println(i + " - error: " + e.getMessage());
+            }
         }
     }
 }
