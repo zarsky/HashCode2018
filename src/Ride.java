@@ -1,6 +1,7 @@
 class Ride {
 
     long
+            number,
             startX,
             startY,
             endX,
@@ -9,7 +10,8 @@ class Ride {
             finishStep,
             distance;
 
-    Ride(int[] data) {
+    Ride(int num, int[] data) {
+        number = num;
         startX = data[0];
         startY = data[1];
         endX = data[2];

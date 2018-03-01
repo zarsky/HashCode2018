@@ -38,7 +38,7 @@ public class Main {
                 }
 
                 for (int i = 0; i < n; i++) {
-                    rides.add(new Ride(splitStringToNumbers(reader.readLine())));
+                    rides.add(new Ride(i, splitStringToNumbers(reader.readLine())));
                 }
 
                 // TODO remove (test)
