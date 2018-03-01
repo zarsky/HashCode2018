@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Car {
@@ -7,6 +8,8 @@ public class Car {
             currentY = 0,
             currentStep = 0;
 
+    List<Long> rides = new ArrayList<>();
+
     void takeTheBestRide(List<Ride> rides) {
         takeRide(rides.get(0));
     }
@@ -15,6 +18,7 @@ public class Car {
         currentX = ride.endX;
         currentY = ride.endY;
         currentStep = Math.max(getDistanceToRide(ride), ride.startStep) + ride.distance;
+        rides.add(ride.number);
     }
 
     long getLastStepForRide(Ride ride) {
