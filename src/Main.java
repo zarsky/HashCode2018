@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] files = {"big", "example", "medium", "small"};
+        String[] files = {"a_example", "b_should_be_easy", "c_no_hurry", "d_metropolis", "e_high_bonus"};
 
         String line;
 
