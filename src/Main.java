@@ -13,25 +13,51 @@ public class Main {
 
         String line;
 
-        for (int i = 0; i < files.length; i++) {
+        for (int fileNum = 0; fileNum < files.length; fileNum++) {
 
             List<Car> fleet = new ArrayList<>();
+            List<Ride> rides = new ArrayList<>();
 
             try {
-                BufferedReader reader = new BufferedReader(new FileReader("input/" + files[i] + ".in"));
-                BufferedWriter writer = new BufferedWriter(new FileWriter("output/" + files[i] + ".out"));
 
-                String inputs = reader.readLine();
+                BufferedReader reader = new BufferedReader(new FileReader("input/" + files[fileNum] + ".in"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter("output/" + files[fileNum] + ".out"));
 
-                while ((line = reader.readLine()) != null)
-                    writer.write(line);
+                int[] inputs = splitStringToNumbers(reader.readLine());
+
+                int
+                        r = inputs[0],
+                        c = inputs[1],
+                        f = inputs[2],
+                        n = inputs[3],
+                        b = inputs[4],
+                        t = inputs[5];
+
+                for (int i = 0; i < f; i++) {
+                    fleet.add(new Car());
+                }
+
+                for (int i = 0; i < n; i++) {
+                    rides.add(new Ride(splitStringToNumbers(reader.readLine())));
+                }
 
                 reader.close();
                 writer.close();
-                System.out.println(i + " - done!");
+
+                System.out.println(fileNum + " - done!");
+
             } catch (Exception e) {
-                System.err.println(i + " - error: " + e.getMessage());
+                System.err.println(fileNum + " - error: " + e.getMessage());
             }
         }
+    }
+
+    static int[] splitStringToNumbers(String s) {
+        String[] data = s.split(" ");
+        int[] numbers = new int[data.length];
+        for (int i = 0; i < data.length; i++) {
+            numbers[i] = Integer.parseInt(data[i]);
+        }
+        return numbers;
     }
 }
