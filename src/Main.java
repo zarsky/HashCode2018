@@ -15,9 +15,6 @@ public class Main {
 
         for (int fileNum = 0; fileNum < files.length; fileNum++) {
 
-            List<Car> fleet = new ArrayList<>();
-            List<Ride> rides = new ArrayList<>();
-
             try {
 
                 BufferedReader reader = new BufferedReader(new FileReader("input/" + files[fileNum] + ".in"));
@@ -33,6 +30,9 @@ public class Main {
                         b = inputs[4],
                         t = inputs[5];
 
+                List<Car> fleet = new ArrayList<>(f);
+                List<Ride> rides = new ArrayList<>(n);
+
                 for (int i = 0; i < f; i++) {
                     fleet.add(new Car());
                 }
@@ -41,6 +41,7 @@ public class Main {
                     rides.add(new Ride(splitStringToNumbers(reader.readLine())));
                 }
 
+                // TODO remove (test)
                 for (int i = 0; i < n; i++) {
                     writer.write(rides.get(i).distance + "\n");
                 }

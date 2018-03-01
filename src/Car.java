@@ -8,7 +8,7 @@ public class Car {
             currentStep = 0;
 
     void takeTheBestRide(List<Ride> rides) {
-        takeRide(rides.get(0)); // TODO Logic here
+        takeRide(rides.get(0));
     }
 
     void takeRide(Ride ride) {

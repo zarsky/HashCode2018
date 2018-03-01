@@ -1,4 +1,4 @@
-public class Ride {
+class Ride {
 
     long
             startX,
