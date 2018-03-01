@@ -8,17 +8,23 @@ public class Car {
             currentY = 0,
             currentStep = 0;
 
-    List<Long> rides = new ArrayList<>();
+    List<Ride> availableRides;
+    List<Long> rideNumbers = new ArrayList<>();
 
-    void takeTheBestRide(List<Ride> rides) {
-        takeRide(rides.get(0));
+    Car(List<Ride> rides) {
+        availableRides = rides;
+    }
+
+    void takeTheBestRide() {
+        takeRide(availableRides.get(0));
     }
 
     void takeRide(Ride ride) {
         currentX = ride.endX;
         currentY = ride.endY;
         currentStep = Math.max(getDistanceToRide(ride), ride.startStep) + ride.distance;
-        rides.add(ride.number);
+        rideNumbers.add(ride.number);
+        availableRides.remove(ride);
     }
 
     long getLastStepForRide(Ride ride) {
@@ -33,7 +39,7 @@ public class Car {
 
     @Override
     protected Car clone() {
-        Car newCar = new Car();
+        Car newCar = new Car(availableRides);
         newCar.currentX = currentX;
         newCar.currentY = currentY;
         newCar.currentStep = currentStep;

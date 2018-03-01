@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Main {
 
+    static final String SPACE = " ";
+
     public static void main(String[] args) {
 
         String[] files = {"a_example", "b_should_be_easy", "c_no_hurry", "d_metropolis", "e_high_bonus"};
@@ -33,17 +35,31 @@ public class Main {
                 List<Car> fleet = new ArrayList<>(f);
                 List<Ride> rides = new ArrayList<>(n);
 
-                for (int i = 0; i < f; i++) {
-                    fleet.add(new Car());
-                }
-
                 for (int i = 0; i < n; i++) {
                     rides.add(new Ride(i, splitStringToNumbers(reader.readLine())));
                 }
 
-                // TODO remove (test)
-                for (int i = 0; i < n; i++) {
-                    writer.write(rides.get(i).distance + "\n");
+                for (int i = 0; i < f; i++) {
+                    fleet.add(new Car(rides));
+                }
+
+                // TODO solution goes here
+                for (int i = 0; i < fleet.size(); i++) {
+                    if (rides.size() > 0)
+                        fleet.get(i).takeTheBestRide();
+                }
+
+                // Output
+                for (int i = 0; i < fleet.size(); i++) {
+                    Car currentCar = fleet.get(i);
+                    StringBuilder sb = new StringBuilder();
+                    int numRides = currentCar.rideNumbers.size();
+                    sb.append(numRides).append(SPACE);
+                    for (int j = 0; j < numRides; j++) {
+                        sb.append(currentCar.rideNumbers.get(j)).append(SPACE);
+                    }
+                    sb.append("\n");
+                    writer.write(sb.toString());
                 }
 
                 reader.close();
@@ -58,7 +74,7 @@ public class Main {
     }
 
     static int[] splitStringToNumbers(String s) {
-        String[] data = s.split(" ");
+        String[] data = s.split(SPACE);
         int[] numbers = new int[data.length];
         for (int i = 0; i < data.length; i++) {
             numbers[i] = Integer.parseInt(data[i]);
