@@ -17,7 +17,7 @@ public class Car {
         availableRides = rides;
     }
 
-    void takeTheBestRide() {
+    boolean takeTheBestRide() {
         long minStep = Long.MAX_VALUE;
         pos = -1;
         for (int i = 0; i < availableRides.size(); i++) {
@@ -31,7 +31,9 @@ public class Car {
         if (pos > -1) {
             takeRide(availableRides.get(pos));
             availableRides.remove(pos);
+            return true;
         }
+        return false;
     }
 
     void takeRidesWhileCan() {

@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
@@ -29,7 +30,7 @@ public class Main {
                         b = inputs[4],
                         t = inputs[5];
 
-                List<Car> fleet = new ArrayList<>(f);
+                List<Car> cars = new ArrayList<>(f);
                 List<Ride> rides = new ArrayList<>(n);
 
                 for (int i = 0; i < n; i++) {
@@ -37,21 +38,28 @@ public class Main {
                 }
 
                 for (int i = 0; i < f; i++) {
-                    fleet.add(new Car(rides));
+                    cars.add(new Car(rides));
                 }
+
+                List<Car> doneCars = new ArrayList<>();
 
                 // TODO solution goes here
-                //while (rides.size() > 0) {}
-
-                for (int i = 0; i < fleet.size(); i++) {
-                    if (i % 10 == 0)
-                        System.out.println("Car " + i);
-                    fleet.get(i).takeRidesWhileCan();
+                while (cars.size() > 0) {
+                    System.out.println("cars.size() " + cars.size());
+                    int randomI = ThreadLocalRandom.current().nextInt(0, cars.size());
+                    if (!cars.get(randomI).takeTheBestRide())
+                        doneCars.add(cars.remove(randomI));
                 }
 
+                /*for (int i = 0; i < cars.size(); i++) {
+                    if (i % 10 == 0)
+                        System.out.println("Car " + i);
+                    cars.get(i).takeRidesWhileCan();
+                }*/
+
                 // Output
-                for (int i = 0; i < fleet.size(); i++) {
-                    Car currentCar = fleet.get(i);
+                for (int i = 0; i < doneCars.size(); i++) {
+                    Car currentCar = doneCars.get(i);
                     StringBuilder sb = new StringBuilder();
                     int numRides = currentCar.rideNumbers.size();
                     sb.append(numRides).append(SPACE);
