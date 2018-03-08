@@ -15,14 +15,17 @@ class Car {
     List<Ride> availableRides = new ArrayList<>();
 
     Ride takeTheBestRide() {
-        long minStep = Long.MAX_VALUE;
+        long minWaste = Long.MAX_VALUE;
         int pos = -1;
         for (int i = 0; i < availableRides.size(); i++) {
             Ride currentRide = availableRides.get(i);
             long currentLastStep = getLastStepForRide(currentRide);
-            if (currentLastStep <= currentRide.finishStep && currentLastStep < minStep) {
-                minStep = currentLastStep;
-                pos = i;
+            if (currentLastStep <= currentRide.finishStep) {
+                long currentWaste = currentLastStep - currentRide.distance;
+                if (currentWaste < minWaste) {
+                    minWaste = currentWaste;
+                    pos = i;
+                }
             }
         }
         if (pos > -1) {
