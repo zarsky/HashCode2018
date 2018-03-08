@@ -14,7 +14,7 @@ public class Main {
 
         String line;
 
-        for (int fileNum = 0; fileNum < Math.min(1, files.length); fileNum++) {
+        for (int fileNum = 0; fileNum < Math.min(9, files.length); fileNum++) {
 
             try {
 
@@ -50,7 +50,7 @@ public class Main {
                     continueSearch = false;
 
                     int size = rides.size();
-                    if (size % 1 == 0)
+                    if (size % 10 == 0)
                         System.out.println("rides.size() " + size);
 
                     for (Ride ride : rides) {

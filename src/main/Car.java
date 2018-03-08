@@ -21,8 +21,6 @@ class Car {
             Ride currentRide = availableRides.get(i);
             long currentLastStep = getLastStepForRide(currentRide);
             if (currentLastStep <= currentRide.finishStep && currentLastStep < minStep) {
-                System.err.println("currentLastStep " + currentLastStep);
-                System.err.println("currentRide.finishStep " + currentRide.finishStep);
                 minStep = currentLastStep;
                 pos = i;
             }
@@ -37,10 +35,9 @@ class Car {
     }
 
     void takeRide(Ride ride) {
+        currentStep = getLastStepForRide(ride);
         currentX = ride.endX;
         currentY = ride.endY;
-        currentStep = getLastStepForRide(ride);
-        System.err.println("getLastStepForRide " + currentStep);
         rideNumbers.add(ride.number);
         ride.isTaken = true;
     }
