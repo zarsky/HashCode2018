@@ -1,52 +1,48 @@
+package main;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Car {
+class Car {
 
     long
-            currentX = 0,
-            currentY = 0,
-            currentStep = 0;
+            currentX,
+            currentY,
+            currentStep,
+            testNumber;
 
-    int pos = -1;
-
-    List<Ride> availableRides;
     List<Long> rideNumbers = new ArrayList<>();
+    List<Ride> availableRides = new ArrayList<>();
 
-    Car(List<Ride> rides) {
-        availableRides = rides;
-    }
-
-    boolean takeTheBestRide() {
+    Ride takeTheBestRide() {
         long minStep = Long.MAX_VALUE;
-        pos = -1;
+        int pos = -1;
         for (int i = 0; i < availableRides.size(); i++) {
             Ride currentRide = availableRides.get(i);
             long currentLastStep = getLastStepForRide(currentRide);
             if (currentLastStep <= currentRide.finishStep && currentLastStep < minStep) {
+                System.err.println("currentLastStep " + currentLastStep);
+                System.err.println("currentRide.finishStep " + currentRide.finishStep);
                 minStep = currentLastStep;
                 pos = i;
             }
         }
         if (pos > -1) {
-            takeRide(availableRides.get(pos));
-            availableRides.remove(pos);
-            return true;
+            Ride ride = availableRides.get(pos);
+            takeRide(ride);
+            availableRides.clear();
+            return ride;
         }
-        return false;
-    }
-
-    void takeRidesWhileCan() {
-        do {
-            takeTheBestRide();
-        } while (pos > -1);
+        return null;
     }
 
     void takeRide(Ride ride) {
         currentX = ride.endX;
         currentY = ride.endY;
         currentStep = getLastStepForRide(ride);
+        System.err.println("getLastStepForRide " + currentStep);
         rideNumbers.add(ride.number);
+        ride.isTaken = true;
     }
 
     long getLastStepForRide(Ride ride) {

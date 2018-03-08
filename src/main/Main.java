@@ -1,7 +1,8 @@
+package main;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
@@ -13,7 +14,7 @@ public class Main {
 
         String line;
 
-        for (int fileNum = 0; fileNum < Math.min(9, files.length); fileNum++) {
+        for (int fileNum = 0; fileNum < Math.min(1, files.length); fileNum++) {
 
             try {
 
@@ -38,17 +39,38 @@ public class Main {
                 }
 
                 for (int i = 0; i < f; i++) {
-                    cars.add(new Car(rides));
+                    cars.add(new Car());
                 }
 
-                List<Car> doneCars = new ArrayList<>();
+                //List<Car> doneCars = new ArrayList<>();
 
                 // TODO solution goes here
-                while (cars.size() > 0) {
-                    System.out.println("cars.size() " + cars.size());
-                    int randomI = ThreadLocalRandom.current().nextInt(0, cars.size());
-                    if (!cars.get(randomI).takeTheBestRide())
-                        doneCars.add(cars.remove(randomI));
+                boolean continueSearch = true;
+                while (continueSearch) {
+                    continueSearch = false;
+
+                    int size = rides.size();
+                    if (size % 1 == 0)
+                        System.out.println("rides.size() " + size);
+
+                    for (Ride ride : rides) {
+                        Car optimalCar = ride.chooseOptimalCar(cars);
+                        if (optimalCar != null) {
+                            continueSearch = true;
+                            optimalCar.availableRides.add(ride);
+                        }
+                    }
+
+                    for (Car car : cars) {
+                        car.takeTheBestRide();
+                    }
+
+                    int i = 0;
+                    while (i < rides.size())
+                        if (rides.get(i).isTaken)
+                            rides.remove(i);
+                        else
+                            ++i;
                 }
 
                 /*for (int i = 0; i < cars.size(); i++) {
@@ -58,8 +80,8 @@ public class Main {
                 }*/
 
                 // Output
-                for (int i = 0; i < doneCars.size(); i++) {
-                    Car currentCar = doneCars.get(i);
+                for (int i = 0; i < cars.size(); i++) {
+                    Car currentCar = cars.get(i);
                     StringBuilder sb = new StringBuilder();
                     int numRides = currentCar.rideNumbers.size();
                     sb.append(numRides).append(SPACE);
