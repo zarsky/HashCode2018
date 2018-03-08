@@ -32,7 +32,7 @@ class Ride {
         Car optimalCar = null;
         long
                 diff = Long.MAX_VALUE,
-                distToRide = Long.MAX_VALUE;
+                distToRide = Long.MIN_VALUE;
 
         for (Car car : cars) {
             if (car.getLastStepForRide(this) <= finishStep) {
@@ -44,7 +44,7 @@ class Ride {
                         diff = currDiff;
                         optimalCar = car;
                     } else {
-                        if (currDistToRide < distToRide) {
+                        if (currDistToRide > distToRide) {
                             distToRide = currDistToRide;
                             optimalCar = car;
                         }
@@ -54,7 +54,7 @@ class Ride {
                         diff = currDiff;
                         optimalCar = car;
                     } else if (currDiff == diff) {
-                        if (currDistToRide < distToRide) {
+                        if (currDistToRide > distToRide) {
                             distToRide = currDistToRide;
                             optimalCar = car;
                         }
