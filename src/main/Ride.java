@@ -38,14 +38,26 @@ class Ride {
             if (car.getLastStepForRide(this) <= finishStep) {
                 long
                         currDistToRide = car.getDistanceToRide(this),
-                        currDiff = Math.abs(car.currentStep + currDistToRide - startStep);
-                if (currDiff < diff) {
-                    diff = currDiff;
-                    optimalCar = car;
-                } else if (currDiff == diff) {
-                    if (currDistToRide < distToRide) {
-                        distToRide = currDistToRide;
+                        currDiff = car.currentStep + currDistToRide - startStep;
+                if (currDiff == 0) {
+                    if (diff != 0) {
+                        diff = currDiff;
                         optimalCar = car;
+                    } else {
+                        if (currDistToRide < distToRide) {
+                            distToRide = currDistToRide;
+                            optimalCar = car;
+                        }
+                    }
+                } else if (diff != 0) {
+                    if (currDiff < diff) {
+                        diff = currDiff;
+                        optimalCar = car;
+                    } else if (currDiff == diff) {
+                        if (currDistToRide < distToRide) {
+                            distToRide = currDistToRide;
+                            optimalCar = car;
+                        }
                     }
                 }
             }
